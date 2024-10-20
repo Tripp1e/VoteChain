@@ -23,7 +23,7 @@ fun Application.configureRouting() {
 
         post("/submit") {
             val clientIp = call.request.origin.remoteHost
-            if (clientIp in localHosts) return@post call.respond(HttpStatusCode.Forbidden, "Access denied")
+            if (clientIp !in localHosts) return@post call.respond(HttpStatusCode.Forbidden, "Access denied")
 
 
             val params = call.receiveParameters()
