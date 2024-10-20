@@ -6,9 +6,9 @@ object ValidityCheck {
 
     fun checkBlock(block: Block): Boolean { return checkBlock(block, blockchain.last()) }
     fun checkBlock(block: Block, previousBlock: Block): Boolean {
+        if (!isBlockMined(block))                           return false
         if (!doCurrentHashesMatch(block))                   return false
         if (!doPreviousHashesMatch(block, previousBlock))   return false
-        if (!isBlockMined(block))                           return false
 
         return true
     }

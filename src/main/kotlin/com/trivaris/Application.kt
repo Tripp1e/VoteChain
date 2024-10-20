@@ -1,10 +1,11 @@
 package com.trivaris
 
-import com.trivaris.plugins.*
-import io.ktor.server.application.*
+import io.ktor.server.application.Application
+import io.ktor.server.netty.EngineMain
+import com.trivaris.networking.*
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+    EngineMain.main(args)
 }
 
 fun Application.module() {
