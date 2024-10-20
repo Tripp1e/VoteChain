@@ -12,28 +12,24 @@ object BlockChain {
 
     val blockchain = arrayListOf<Block>(Block("data", "0"))
     const val DIFFICULTY = 5
+    val json = Json { prettyPrint = true }
 
     fun printBlockChain() {
 
         println("\nThe blockchain is valid: ${ValidityCheck.checkBlockChain()}")
 
-        val votingChainJson = Json.encodeToString(blockchain)
+        val votingChainJson = json.encodeToString(blockchain)
         println("\nThe blockchain: ")
         println(votingChainJson)
 
     }
 
     fun addTestBlocks() {
-        addBlock("Hi, Im the first block")
-        addBlock("Yo, Im the second block")
-        addBlock("Oy, Im the third block")
+        addBlock(Block("Hi, Im the first block"))
+        addBlock(Block("Yo, Im the second block"))
+        addBlock(Block("Oy, Im the third block"))
     }
 
-    fun addBlock(data: String) {
-        val prevHash = if (blockchain.isEmpty()) "0" else blockchain.last().hash
-        val block = Block(data, prevHash)
-        addBlock(block)
-    }
     fun addBlock(block: Block) {
         block.mineBlock()
         if (!ValidityCheck.checkBlock(block)) return

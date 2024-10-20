@@ -6,7 +6,7 @@ import java.util.Date
 @Serializable
 data class Block(
     val data: String,
-    val previousHash: String,
+    val previousHash: String = BlockChain.blockchain.last().previousHash,
     var hash: String = "",
     val timestamp: Long = Date().time,
     var nonce: Int = 0,
