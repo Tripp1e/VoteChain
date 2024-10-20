@@ -6,12 +6,13 @@ import java.util.Date
 @Serializable
 data class Block(
     val data: String,
-    val previousHash: String = BlockChain.blockchain.last().previousHash,
+    val previousHash: String = BlockChain.blockchain.last().hash,
     var hash: String = "",
     val timestamp: Long = Date().time,
     var nonce: Int = 0,
     val difficulty: Int = BlockChain.DIFFICULTY
 ) {
+
     init {
         hash = calculateHash()
     }
@@ -21,12 +22,12 @@ data class Block(
         return StringUtil.applySha256(toEncode)
     }
 
-    fun mineBlock() {
+    fun mine() {
         val target = "0".repeat(difficulty)
         while (hash.substring(0, difficulty) != target) {
             nonce++
             hash = calculateHash()
         }
-        println("Block mined!! : $hash")
     }
+
 }

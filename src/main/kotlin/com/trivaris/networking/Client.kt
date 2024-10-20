@@ -9,18 +9,19 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.json
 
 object Client {
+
     val client = HttpClient {
         install(ContentNegotiation) {
             json()
         }
     }
 
-    suspend fun dispatchPostRequest(body: Block, url: String): HttpResponse {
-        println("Posting request!")
+    suspend fun dispatchAddRequest(body: Block, url: String): HttpResponse {
         val response = client.post("http://${url}:8080/add") {
             contentType(ContentType.Application.Json)
             setBody(body)
         }
         return response
     }
+
 }

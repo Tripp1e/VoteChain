@@ -4,11 +4,11 @@ import com.trivaris.blockchain.BlockChain.blockchain
 
 object ValidityCheck {
 
-    fun checkBlock(block: Block): Boolean { return checkBlock(block, blockchain.last()) }
-    fun checkBlock(block: Block, previousBlock: Block): Boolean {
-        if (!isBlockMined(block))                           return false
-        if (!doCurrentHashesMatch(block))                   return false
-        if (!doPreviousHashesMatch(block, previousBlock))   return false
+    fun checkBlockWithLatest(block: Block): Boolean { return checkBlockWithPrevious(block, blockchain.last()) }
+    fun checkBlockWithPrevious(currentBlock: Block, previousBlock: Block): Boolean {
+        if (!isBlockMined(currentBlock))                           return false
+        if (!doCurrentHashesMatch(currentBlock))                   return false
+        if (!doPreviousHashesMatch(currentBlock, previousBlock))   return false
 
         return true
     }
@@ -20,7 +20,7 @@ object ValidityCheck {
         for (i in 1 until blockchain.size) {
             currentBlock = blockchain[i]
             previousBlock = blockchain[i - 1]
-            checkBlock(currentBlock, previousBlock)
+            if (!checkBlockWithPrevious(currentBlock, previousBlock)) return false
         }
         return true
     }

@@ -31,8 +31,8 @@ object BlockChain {
     }
 
     fun addBlock(block: Block) {
-        block.mineBlock()
-        if (!ValidityCheck.checkBlock(block)) return
+        block.mine()
+        if (!ValidityCheck.checkBlockWithLatest(block)) return
         blockchain.add(block)
     }
 
