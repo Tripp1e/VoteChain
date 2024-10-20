@@ -18,7 +18,6 @@ val exampleIPList = arrayOf("127.0.0.1")
 
 fun Application.configureRouting() {
 
-
     routing {
         staticFiles("/", File("resources/static"))
 
